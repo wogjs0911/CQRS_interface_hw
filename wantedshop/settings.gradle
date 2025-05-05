@@ -1,0 +1,3 @@
+rootProject.name = 'wantedshop'
+
+include 'wantedshop'  // backend 프로젝트 모듈을 포함

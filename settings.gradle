@@ -1,0 +1,3 @@
+rootProject.name = 'wanted-preonboarding-challenge-backend-31'
+
+include 'wantedshop'  // backend 프로젝트 모듈을 포함
