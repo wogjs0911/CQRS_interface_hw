@@ -114,7 +114,7 @@
 ## 데이터 모델 요구사항
 다음과 같이 복잡한 연관 관계를 가진 데이터 모델을 설계하세요:
 
-![ERD](./erd.png)
+![ERD](wantedshop/erd.png)
 
 ### 상품(Product) 테이블
 - id: 상품 ID (PK)
