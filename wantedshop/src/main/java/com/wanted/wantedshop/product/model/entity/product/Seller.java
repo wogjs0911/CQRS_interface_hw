@@ -1,10 +1,12 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.common.BaseEntity;
 import com.wanted.wantedshop.common.exception.BaseResDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
@@ -14,10 +16,10 @@ import java.time.Instant;
 @Table(name = "sellers")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Seller extends BaseResDto {
+public class Seller extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

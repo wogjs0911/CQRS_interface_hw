@@ -1,11 +1,13 @@
 package com.wanted.wantedshop.product.model.entity.review;
 
+import com.wanted.wantedshop.common.BaseEntity;
 import com.wanted.wantedshop.common.exception.BaseResDto;
 import com.wanted.wantedshop.product.model.entity.product.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,10 +18,10 @@ import java.time.Instant;
 @Table(name = "reviews")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Review extends BaseResDto {
+public class Review extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

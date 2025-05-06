@@ -19,9 +19,14 @@ public class QSeller extends EntityPathBase<Seller> {
 
     public static final QSeller seller = new QSeller("seller");
 
+    public final com.wanted.wantedshop.common.QBaseEntity _super = new com.wanted.wantedshop.common.QBaseEntity(this);
+
     public final StringPath contactEmail = createString("contactEmail");
 
     public final StringPath contactPhone = createString("contactPhone");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final StringPath description = createString("description");
 
@@ -32,6 +37,9 @@ public class QSeller extends EntityPathBase<Seller> {
     public final StringPath name = createString("name");
 
     public final NumberPath<java.math.BigDecimal> rating = createNumber("rating", java.math.BigDecimal.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
     public QSeller(String variable) {
         super(Seller.class, forVariable(variable));

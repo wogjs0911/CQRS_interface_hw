@@ -22,7 +22,12 @@ public class QProduct extends EntityPathBase<Product> {
 
     public static final QProduct product = new QProduct("product");
 
+    public final com.wanted.wantedshop.common.QBaseEntity _super = new com.wanted.wantedshop.common.QBaseEntity(this);
+
     public final QBrand brand;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final StringPath fullDescription = createString("fullDescription");
 
@@ -36,7 +41,10 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final StringPath slug = createString("slug");
 
-    public final StringPath status = createString("status");
+    public final EnumPath<ProductStatus> status = createEnum("status", ProductStatus.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
     public QProduct(String variable) {
         this(Product.class, forVariable(variable), INITS);

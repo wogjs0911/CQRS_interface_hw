@@ -3,8 +3,11 @@ package com.wanted.wantedshop.product.application;
 import com.wanted.wantedshop.common.exception.ResultCode;
 import com.wanted.wantedshop.common.exception.ServiceException;
 import com.wanted.wantedshop.product.infrastructure.repository.ProductRepository;
+import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
+import com.wanted.wantedshop.product.model.dto.response.ProductSearchResponse;
 import com.wanted.wantedshop.product.model.entity.product.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,10 @@ public class ProductService {
     public Product getByName(String name) {
         return repository.findByName(name)
                 .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+    }
+
+    public Page<ProductSearchResponse> getProductsByConditions(ProductSearchRequest searchRequest) {
+        return repository.findProductsByConditions(searchRequest);
     }
 
     public List<Product> getAllProductList() {

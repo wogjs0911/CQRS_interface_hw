@@ -1,19 +1,21 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.common.BaseEntity;
 import com.wanted.wantedshop.common.exception.BaseResDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "products")
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
+@NoArgsConstructor
 @AllArgsConstructor
-public class Product extends BaseResDto {
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
@@ -46,5 +48,6 @@ public class Product extends BaseResDto {
     @Size(max = 20)
     @NotNull
     @Column(nullable = false, length = 20)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ProductStatus status;
 }

@@ -54,7 +54,7 @@ public class QProductOption extends EntityPathBase<ProductOption> {
 
     public QProductOption(Class<? extends ProductOption> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.optionGroup = inits.isInitialized("optionGroup") ? new QProductOptionGroup(forProperty("optionGroup")) : null;
+        this.optionGroup = inits.isInitialized("optionGroup") ? new QProductOptionGroup(forProperty("optionGroup"), inits.get("optionGroup")) : null;
     }
 
 }

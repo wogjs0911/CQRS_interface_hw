@@ -1,53 +1,75 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.4.5'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.wanted'
 version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
-}
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+def queryDslVersion = "5.1.0"
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.apache.commons:commons-lang3:3.14.0' // Exception에 에러 많다.
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-	// Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql:42.7.3' // 최신 버전 확인 가능
 
-	// Exception
-	implementation "org.junit.platform:junit-platform-commons:1.10.1"
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 
-	// Querydsl
-	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	// Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation "com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0"
+	// QueryDSL
+	implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta")
+	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+clean {
+	delete file('src/main/generated')
+}
+
+// === QueryDSL 설정 ===
+def generatedDir = file("src/main/generated")
+
+tasks.withType(JavaCompile).configureEach {
+	options.annotationProcessorGeneratedSourcesDirectory = generatedDir
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs += generatedDir
+		}
+	}
+}
+
+tasks.named('build') {
+	dependsOn tasks.named('compileQuerydsl')
+}
+
+// Q타입 생성 Task 등록
+tasks.register("compileQuerydsl", JavaCompile) {
+	group = "build"
+	description = "Generate QueryDSL Q-types"
+	classpath = sourceSets.main.compileClasspath
+	source = sourceSets.main.java
+	options.annotationProcessorPath = configurations.annotationProcessor
+	destinationDirectory = generatedDir
 }

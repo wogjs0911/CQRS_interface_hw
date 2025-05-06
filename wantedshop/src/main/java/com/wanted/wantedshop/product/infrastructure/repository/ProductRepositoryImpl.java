@@ -1,14 +1,109 @@
 package com.wanted.wantedshop.product.infrastructure.repository;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.wanted.wantedshop.product.model.entity.product.Product;
+import com.wanted.wantedshop.product.infrastructure.repository.custom.ProductRepositoryCustom;
+import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
+import com.wanted.wantedshop.product.model.dto.response.ProductSearchResponse;
+import com.wanted.wantedshop.product.model.entity.category.QCategory;
+import com.wanted.wantedshop.product.model.entity.product.*;
+import com.wanted.wantedshop.product.model.entity.review.QReview;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.wanted.wantedshop.common.SortUtil.parseMultiSortString;
 
 @RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
     private final JPAQueryFactory queryFactory;
+
+    @Override
+    public Page<ProductSearchResponse> findProductsByConditions(ProductSearchRequest searchRequest) {
+        // Product, ProductPrice, Brand, Seller, ProductImage, Review
+        QProduct product = QProduct.product;
+        QProductPrice productPrice = QProductPrice.productPrice;
+        QBrand brand = QBrand.brand;
+        QSeller seller = QSeller.seller;
+        QProductImage productImage = QProductImage.productImage;
+        QReview review = QReview.review;
+
+        List<OrderSpecifier<?>> orderSpecifiers = getOrderSpecifiers(searchRequest.getSort());
+
+        // 둘 이상이면 타입을 명확하게 지정할 수 없으므로 튜플이나 DTO로 조회
+        JPAQuery<ProductSearchResponse> query = queryFactory
+                .select(Projections.constructor(ProductSearchResponse.class))
+                .from(product)
+                .leftJoin(seller).on(seller.eq(product.seller))
+                .leftJoin(brand).on(brand.eq(product.brand))
+                .leftJoin(productPrice).on(productPrice.product.eq(product))
+                .leftJoin(productImage).on(productImage.product.eq(product))
+                .leftJoin(review).on(review.product.eq(product))
+                .where(buildSearchCondition(searchRequest))
+                .orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]));
+
+        List<ProductSearchResponse> content = query
+                .fetch();
+
+        // totalCount 조회
+        long totalCount = query
+                .offset(searchRequest.getPage())  // 페이지네이션 처리
+                .limit(searchRequest.getPerPage())  // 페이지네이션 처리
+                .fetchCount();
+
+        return new PageImpl<>(content, PageRequest.of(searchRequest.getPage(), searchRequest.getPerPage()), totalCount);
+    }
+
+    private BooleanBuilder buildSearchCondition(ProductSearchRequest searchRequest){
+        QProduct product = QProduct.product;
+        QProductPrice productPrice = QProductPrice.productPrice;
+        QBrand brand = QBrand.brand;
+        QSeller seller = QSeller.seller;
+        QProductCategory productCategory = QProductCategory.productCategory;
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+
+        if(searchRequest.getMaxPrice() != null){
+            booleanBuilder.and(productPrice.basePrice.loe(searchRequest.getMaxPrice()));
+        }
+
+        if(searchRequest.getMinPrice() != null){
+            booleanBuilder.and(productPrice.basePrice.goe(searchRequest.getMinPrice()));
+        }
+
+        return booleanBuilder;
+    }
+
+    private List<OrderSpecifier<?>> getOrderSpecifiers(String sortParam) {
+        QProduct product = QProduct.product;
+        QProductPrice productPrice = QProductPrice.productPrice;
+        QReview review = QReview.review;
+
+        Sort sort = parseMultiSortString(sortParam);
+        List<OrderSpecifier<?>> orderSpecifiers = new ArrayList<>();
+        if(sort != null){
+            for(Sort.Order order: sort){
+                switch(order.getProperty()){
+                    case "created_at" ->
+                        orderSpecifiers.add(order.isAscending() ? product.createdAt.asc() : product.createdAt.desc());
+                    case "sale_price" ->
+                            orderSpecifiers.add(order.isAscending() ? productPrice.salePrice.asc() : productPrice.salePrice.desc());
+                    case "rating" ->
+                            orderSpecifiers.add(order.isAscending() ? review.rating.avg().asc() : review.rating.avg().desc());
+                    default -> {
+                    }
+                }
+            }
+        }
+        return orderSpecifiers;
+    }
 
 }

@@ -1,9 +1,16 @@
 package com.wanted.wantedshop.common.exception;
 
+import lombok.Getter;
+
+@Getter
 public enum ResultCode {
     SUCCESS(200, ResultMessage.SUCCESS),
+    SUCCESS_PRODUCTS(200, ResultMessage.SUCCESS_PRODUCTS),
+    INVALID_INPUT(401, ResultMessage.INVALID_INPUT),
     UNAUTHORIZED(401, ResultMessage.UNAUTHORIZED),
-    NO_AUTH(403, ResultMessage.NO_AUTH),
+    FORBIDDEN(403, ResultMessage.FORBIDDEN),
+    RESOURCE_NOT_FOUND(404, ResultMessage.RESOURCE_NOT_FOUND),
+    CONFLICT(409, ResultMessage.CONFLICT),
     INTERNAL_ERROR(500, ResultMessage.INTERNAL_ERROR),
     ACCESS_NO_AUTH(1_000, ResultMessage.ACCESS_NO_AUTH),
     ACCESS_TOKEN_EXPIRED(1_001, ResultMessage.ACCESS_TOKEN_EXPIRED),
@@ -19,26 +26,22 @@ public enum ResultCode {
     ;
 
     private final int resultCode;
-    private  final String resultMessage;
+    private final String resultMessage;
 
     ResultCode(int resultCode, String resultMessage) {
         this.resultCode = resultCode;
         this.resultMessage = resultMessage;
     }
 
-    public int getResultCode() {
-        return resultCode;
-    }
-
-    public String getResultMessage() {
-        return resultMessage;
-    }
-
     public interface ResultMessage{
-        String SUCCESS = "완료 되었습니다.";
-        String UNAUTHORIZED = "인증에 실패하였습니다.";
-        String NO_AUTH = "전급 권한이 없습니다.";
-        String INTERNAL_ERROR = "시스템 오류가 발생하였습니다. 다시 시도해주세요.";
+        String SUCCESS = "요청이 성공적으로 처리되었습니다.";
+        String SUCCESS_PRODUCTS = "상품 목록을 성공적으로 조회했습니다.";
+        String INVALID_INPUT = "잘못된 입력 데이터";
+        String RESOURCE_NOT_FOUND = "인증되지 않은 요청";
+        String FORBIDDEN = "권한이 없는 요청";
+        String UNAUTHORIZED = "요청한 리소스를 찾을 수 없음";
+        String CONFLICT = "리소스 충돌 발생";
+        String INTERNAL_ERROR = "서버 내부 오류";
         String ACCESS_NO_AUTH = "접근 권한이 없습니다.";
         String ACCESS_TOKEN_EXPIRED = "Access Token이 만료되었습니다.";
         String REFRESH_TOKEN_EXPIRED = "Refresh Token이 만료되었습니다.";

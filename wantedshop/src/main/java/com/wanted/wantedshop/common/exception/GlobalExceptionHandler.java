@@ -1,7 +1,7 @@
 package com.wanted.wantedshop.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.platform.commons.util.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
         if(fieldError == null){
             baseResDto.setResultCode(ResultCode.INTERNAL_ERROR.getResultCode());
             baseResDto.setResultMessage(ResultCode.INTERNAL_ERROR.getResultMessage());
-            log.info("Internal Exception: code[{}]", ExceptionUtils.readStackTrace(e));
+            log.info("Internal Exception: code[{}]", ExceptionUtils.getStackTrace(e));
         }
 
     String code = fieldError.getCode();
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
         BaseResDto baseResDto = new BaseResDto();
         baseResDto.setResultCode(ResultCode.VALID_NOT_NULL.getResultCode());
         baseResDto.setResultMessage(ResultCode.VALID_NOT_NULL.getResultMessage().replace(field, e.getParameterName()));
-        log.error("ValidationException: message[{}]", ExceptionUtils.readStackTrace(e));
+        log.error("ValidationException: message[{}]", ExceptionUtils.getStackTrace(e));
 
         return baseResDto;
     }
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler {
         BaseResDto baseResDto = new BaseResDto();
         baseResDto.setResultCode(ResultCode.INTERNAL_ERROR.getResultCode());
         baseResDto.setResultMessage(ResultCode.INTERNAL_ERROR.getResultMessage());
-        log.error("Internal Exception: {}", ExceptionUtils.readStackTrace(e));
+        log.error("Internal Exception: {}", ExceptionUtils.getStackTrace(e));
 
         return baseResDto;
     }

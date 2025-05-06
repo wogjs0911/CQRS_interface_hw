@@ -15,6 +15,8 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        hibernate.default_batch_fetch_size: 1000    # 연관된 엔티티를 배치로 로딩
+        hibernate.fetchSize: 1000                   # 단일 쿼리에서 한 번에 1000개 행 가져오기
 
 
   # optional: logging tuning for SQL (dev only)
