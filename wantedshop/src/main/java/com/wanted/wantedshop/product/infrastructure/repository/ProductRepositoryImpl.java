@@ -1,8 +1,10 @@
 package com.wanted.wantedshop.product.infrastructure.repository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.wanted.wantedshop.product.infrastructure.repository.custom.ProductRepositoryCustom;
 import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
@@ -37,7 +39,17 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
         // 둘 이상이면 타입을 명확하게 지정할 수 없으므로 튜플이나 DTO로 조회
         List<ProductSearchResponse> content = queryFactory
-                .select(Projections.constructor(ProductSearchResponse.class))
+                .select(Projections.constructor(ProductSearchResponse.class,
+                        product.id,
+                        product.name,
+                        product.slug,
+                        product.shortDescription,
+                        productPrice.basePrice,
+                        productPrice.salePrice,
+                        productImage.url, // primaryImage는 String으로 반환
+                        brand.name.as("brandName"), // brand.name을 "brandName"으로 매핑
+                        review.rating.avg() // 평균 평점은 Double로 반환
+                ))
                 .from(product)
                 .leftJoin(seller).on(seller.eq(product.seller))
                 .leftJoin(brand).on(brand.eq(product.brand))
@@ -45,6 +57,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                 .leftJoin(productImage).on(productImage.product.eq(product))
                 .leftJoin(review).on(review.product.eq(product))
                 .where(buildSearchCondition(searchRequest))
+                .groupBy(product.id, productPrice.id, productImage.url, brand.name)
                 .orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]))
                 .offset((long) searchRequest.getPage() * searchRequest.getPerPage())  // 페이지네이션 처리
                 .limit(searchRequest.getPerPage())  // 페이지네이션 처리

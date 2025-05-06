@@ -21,7 +21,7 @@ public class QueryProductController {
 
     @GetMapping
     public ResponseEntity<ResponseHandler<Page<ProductSearchResponse>>>
-    getProductsByConditions(@RequestBody ProductSearchRequest searchRequest) {
+    getProductsByConditions(@ModelAttribute ProductSearchRequest searchRequest) {
         Page<ProductSearchResponse> productList = service.getProductsByConditions(searchRequest);
         return ResponseEntity.ok(
                 ResponseHandler.of(

@@ -1,12 +1,12 @@
 package com.wanted.wantedshop.product.model.dto.request;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Builder
+@Setter
+@Getter // 또는 @Getter @Setter 조합
+@NoArgsConstructor
 public class ProductSearchRequest {
     private Long categoryId;
     private Long sellerId;
