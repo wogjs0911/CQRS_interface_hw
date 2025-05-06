@@ -12,8 +12,8 @@ public class ProductSearchRequest {
     private Long sellerId;
     private Long brandId;
     private List<Long> tagIds;
-    private Integer page;
-    private Integer perPage;
+    private int page;
+    private int perPage;
     private String sort;
     private String status;
     private Integer minPrice;

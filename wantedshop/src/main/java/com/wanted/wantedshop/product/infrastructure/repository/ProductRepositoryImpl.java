@@ -3,12 +3,10 @@ package com.wanted.wantedshop.product.infrastructure.repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.wanted.wantedshop.product.infrastructure.repository.custom.ProductRepositoryCustom;
 import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
 import com.wanted.wantedshop.product.model.dto.response.ProductSearchResponse;
-import com.wanted.wantedshop.product.model.entity.category.QCategory;
 import com.wanted.wantedshop.product.model.entity.product.*;
 import com.wanted.wantedshop.product.model.entity.review.QReview;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +26,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     @Override
     public Page<ProductSearchResponse> findProductsByConditions(ProductSearchRequest searchRequest) {
-        // Product, ProductPrice, Brand, Seller, ProductImage, Review
         QProduct product = QProduct.product;
         QProductPrice productPrice = QProductPrice.productPrice;
         QBrand brand = QBrand.brand;
@@ -39,7 +36,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         List<OrderSpecifier<?>> orderSpecifiers = getOrderSpecifiers(searchRequest.getSort());
 
         // 둘 이상이면 타입을 명확하게 지정할 수 없으므로 튜플이나 DTO로 조회
-        JPAQuery<ProductSearchResponse> query = queryFactory
+        List<ProductSearchResponse> content = queryFactory
                 .select(Projections.constructor(ProductSearchResponse.class))
                 .from(product)
                 .leftJoin(seller).on(seller.eq(product.seller))
@@ -48,18 +45,28 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                 .leftJoin(productImage).on(productImage.product.eq(product))
                 .leftJoin(review).on(review.product.eq(product))
                 .where(buildSearchCondition(searchRequest))
-                .orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]));
-
-        List<ProductSearchResponse> content = query
+                .orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]))
+                .offset((long) searchRequest.getPage() * searchRequest.getPerPage())  // 페이지네이션 처리
+                .limit(searchRequest.getPerPage())  // 페이지네이션 처리
                 .fetch();
 
         // totalCount 조회
-        long totalCount = query
-                .offset(searchRequest.getPage())  // 페이지네이션 처리
-                .limit(searchRequest.getPerPage())  // 페이지네이션 처리
-                .fetchCount();
+        Long totalCount = queryFactory
+                .select(product.count())
+                .from(product)
+                .leftJoin(seller).on(seller.eq(product.seller))
+                .leftJoin(brand).on(brand.eq(product.brand))
+                .leftJoin(productPrice).on(productPrice.product.eq(product))
+                .leftJoin(productImage).on(productImage.product.eq(product))
+                .leftJoin(review).on(review.product.eq(product))
+                .where(buildSearchCondition(searchRequest))
+                .fetchOne();
 
-        return new PageImpl<>(content, PageRequest.of(searchRequest.getPage(), searchRequest.getPerPage()), totalCount);
+        return new PageImpl<>(
+                content,
+                PageRequest.of(searchRequest.getPage(), searchRequest.getPerPage()),
+                totalCount != null? totalCount : 0L
+        );
     }
 
     private BooleanBuilder buildSearchCondition(ProductSearchRequest searchRequest){
