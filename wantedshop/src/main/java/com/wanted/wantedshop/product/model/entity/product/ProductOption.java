@@ -1,5 +1,6 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.product.model.dto.request.ProductOptionDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -44,4 +45,18 @@ public class ProductOption {
 
     @ColumnDefault("0")
     private Integer displayOrder;
+
+    public static ProductOption ofId(Long optionId) {
+        return optionId == null ? null : ProductOption.builder().id(optionId).build();
+    }
+
+    public static ProductOption from(ProductOptionDto dto) {
+        return ProductOption.builder()
+                .name(dto.getName())
+                .additionalPrice(dto.getAdditionalPrice())
+                .sku(dto.getSku())
+                .stock(dto.getStock())
+                .displayOrder(dto.getDisplayOrder())
+                .build();
+    }
 }

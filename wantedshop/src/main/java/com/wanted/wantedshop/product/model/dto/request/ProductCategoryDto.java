@@ -1,8 +1,16 @@
 package com.wanted.wantedshop.product.model.dto.request;
 
-public class ProductCategoryDto {
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-// "categories": [
+@Data
+@NoArgsConstructor
+public class ProductCategoryDto {
+    private Long categoryId;
+    private Boolean isPrimary;
+
+//     "categories": [
 //   {
 //     "category_id": 5,
 //     "is_primary": true
@@ -12,4 +20,5 @@ public class ProductCategoryDto {
 //     "is_primary": false
 //   }
 // ],
+
 }

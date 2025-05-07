@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.beans.Transient;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,13 +44,6 @@ public class ProductService {
 
     @Transactional
     public Long saveProduct(ProductSaveRequest saveRequest) {
-    // 1. 상품 생성 + Detail
-    // 2. 가격 저장
-    // 3. 카테고리 매핑
-    // 4. 옵션 그룹 및 옵션
-    // 5. 이미지 저장
-//        return repository.save(saveRequest).getId();
-
         // 1) 유효성 체크
         repository.findBySellerId(saveRequest.getSellerId())
             .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
@@ -61,17 +55,40 @@ public class ProductService {
         Product product = repository.save(Product.from(saveRequest));
 
         // 3) ProductDetail save
+        detailRepository.save(ProductDetail.of(product.getId(), saveRequest.getDetail()));
 
         // 4) ProductPrice save
+        priceRepository.save(ProductPrice.of(product.getId(), saveRequest.getPrice()));
 
         // 5) ProductCategory save
+        List<ProductCategory> productCategoryList = saveRequest.getCategories()
+            .stream()
+            .map(dto -> ProductCategory.of(product.getId(), dto))
+            .collect(Collectors.toList());
+        categoryRepository.saveAll(productCategoryList);
 
         // 6) ProductOption save
+        // TODO : 다시 수정하기
+        List<ProductOption> productOptionsList = saveRequest.getOptionGroups()
+            .stream()
+            .flatMap(groupDto -> groupDto.getOptions().stream())
+            .map(dto -> ProductOption.from(dto))
+            .collect(Collectors.toList());
+        optionRepository.saveAll(productOptionsList);
 
         // 7) ProductOptionGroup save
+        List<ProductOptionGroup> productOptionGroupList = saveRequest.getOptionGroups()
+            .stream()
+            .map(dto -> ProductOptionGroup.of(product.getId(), dto))
+            .collect(Collectors.toList());
+        optionGroupRepository.saveAll(productOptionGroupList);
 
         // 8) ProductImage save
-
+        List<ProductImage> productImageList = saveRequest.getImages()
+                .stream()
+                .map(dto -> ProductImage.of(product.getId(), dto))
+                .collect(Collectors.toList());
+        imageRepository.saveAll(productImageList);
 
         return product.getId();
     }

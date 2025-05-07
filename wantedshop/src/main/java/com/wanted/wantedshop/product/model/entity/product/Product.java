@@ -9,6 +9,11 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "products")
 @Getter
@@ -52,6 +57,8 @@ public class Product extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductCategory> categories = new ArrayList<>();
 
     public static Product from(ProductSaveRequest dto) {
         return Product.builder()
@@ -63,5 +70,9 @@ public class Product extends BaseEntity {
                 .brand(Brand.ofId(dto.getBrandId()))
                 .status(dto.getStatus())
                 .build();
+    }
+
+    public static Product ofId(Long id) {
+        return id != null ? Product.builder().id(id).build() : null;
     }
 }

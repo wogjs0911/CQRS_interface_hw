@@ -1,10 +1,16 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.product.model.dto.request.ProductOptionGroupDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product_option_groups")
@@ -23,6 +29,17 @@ public class ProductOptionGroup {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @OneToMany(mappedBy = "optionGroup")
+    private List<ProductOption> productOptions = new ArrayList<>();
+
     @ColumnDefault("0")
     private Integer displayOrder;
+
+    public static ProductOptionGroup of(Long productId, ProductOptionGroupDto dto) {
+        return ProductOptionGroup.builder()
+                .product(Product.ofId(productId))
+                .name(dto.getName())
+                .displayOrder(dto.getDisplayOrder())
+                .build();
+    }
 }

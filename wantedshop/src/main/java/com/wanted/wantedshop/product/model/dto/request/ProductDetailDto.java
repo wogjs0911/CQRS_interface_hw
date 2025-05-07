@@ -1,20 +1,19 @@
 package com.wanted.wantedshop.product.model.dto.request;
 
-public class ProductDetailDto {
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-// "detail": {
-//   "weight": 25.5,
-//   "dimensions": {
-//     "width": 200,
-//     "height": 85,
-//     "depth": 90
-//   },
-//   "materials": "가죽, 목재, 폼",
-//   "country_of_origin": "대한민국",
-//   "warranty_info": "2년 품질 보증",
-//   "care_instructions": "마른 천으로 표면을 닦아주세요",
-//   "additional_info": {
-//     "assembly_required": true,
-//     "assembly_time": "30분"
-//   }
+import java.math.BigDecimal;
+
+@Data
+@NoArgsConstructor
+public class ProductDetailDto {
+    private BigDecimal weight;
+    private DimensionsInfo dimensions;
+    private String materials;
+    private String countryOfOrigin;
+    private String warrantyInfo;
+    private String careInstructions;
+    private AdditionalInfo additionalInfo;
 }

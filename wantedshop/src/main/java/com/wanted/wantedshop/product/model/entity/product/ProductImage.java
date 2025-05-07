@@ -1,5 +1,7 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.product.model.dto.request.ProductDetailDto;
+import com.wanted.wantedshop.product.model.dto.request.ProductImageDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -45,4 +47,15 @@ public class ProductImage {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @JoinColumn(name = "option_id")
     private ProductOption option;
+
+    public static ProductImage of(Long productId, ProductImageDto dto) {
+        return ProductImage.builder()
+                .product(Product.ofId(productId))
+                .url(dto.getUrl())
+                .altText(dto.getAltText())
+                .isPrimary(dto.getIsPrimary())
+                .displayOrder(dto.getDisplayOrder())
+                .option(ProductOption.ofId(dto.getOptionId()))
+                .build();
+    }
 }

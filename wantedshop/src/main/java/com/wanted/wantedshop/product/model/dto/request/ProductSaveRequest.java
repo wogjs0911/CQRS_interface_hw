@@ -24,9 +24,8 @@ public class ProductSaveRequest {
 
     private ProductDetailDto detail;
     private ProductPriceDto price;
-    private ProductCategoryDto categories;
-    private ProductOptionDto options;
-    private ProductOptionGroupDto optionGroups;
-    private ProductImageDto images;
-    private ProductTagDto tags;
+    private List<ProductCategoryDto> categories;    // 이거 영속성 에러 발생할 수 있다.
+    private List<ProductOptionGroupDto> optionGroups;
+    private List<ProductImageDto> images;
+    private List<Integer> tags;
 }

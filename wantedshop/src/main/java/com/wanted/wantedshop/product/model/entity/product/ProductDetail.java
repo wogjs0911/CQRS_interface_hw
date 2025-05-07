@@ -1,5 +1,8 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.product.model.dto.request.AdditionalInfo;
+import com.wanted.wantedshop.product.model.dto.request.DimensionsInfo;
+import com.wanted.wantedshop.product.model.dto.request.ProductDetailDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -31,7 +34,7 @@ public class ProductDetail {
     private BigDecimal weight;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Object> dimensions;
+    private DimensionsInfo dimensions;
 
     @Column(length = Integer.MAX_VALUE)
     private String materials;
@@ -47,5 +50,18 @@ public class ProductDetail {
     private String careInstructions;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Object> additionalInfo;
+    private AdditionalInfo additionalInfo;
+
+    public static ProductDetail of(Long productId, ProductDetailDto dto) {
+        return ProductDetail.builder()
+                .product(Product.ofId(productId))
+                .weight(dto.getWeight())
+                .dimensions(dto.getDimensions())
+                .materials(dto.getMaterials())
+                .countryOfOrigin(dto.getCountryOfOrigin())
+                .warrantyInfo(dto.getWarrantyInfo())
+                .careInstructions(dto.getCareInstructions())
+                .additionalInfo(dto.getAdditionalInfo())
+                .build();
+    }
 }

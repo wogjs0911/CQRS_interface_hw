@@ -1,5 +1,7 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
+import com.wanted.wantedshop.product.model.dto.request.ProductDetailDto;
+import com.wanted.wantedshop.product.model.dto.request.ProductPriceDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -42,4 +44,15 @@ public class ProductPrice {
 
     @Column(precision = 5, scale = 2)
     private BigDecimal taxRate;
+
+    public static ProductPrice of(Long productId, ProductPriceDto dto) {
+        return ProductPrice.builder()
+                .product(Product.ofId(productId))
+                .basePrice(dto.getBasePrice())
+                .salePrice(dto.getSalePrice())
+                .costPrice(dto.getCostPrice())
+                .currency(dto.getCurrency())
+                .taxRate(dto.getTaxRate())
+                .build();
+    }
 }
