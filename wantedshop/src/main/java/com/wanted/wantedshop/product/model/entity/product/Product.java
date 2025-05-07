@@ -2,6 +2,7 @@ package com.wanted.wantedshop.product.model.entity.product;
 
 import com.wanted.wantedshop.common.BaseEntity;
 import com.wanted.wantedshop.common.exception.BaseResDto;
+import com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -50,4 +51,17 @@ public class Product extends BaseEntity {
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
+
+
+    public static Product from(ProductSaveRequest dto) {
+        return Product.builder()
+                .name(dto.getName())
+                .slug(dto.getSlug())
+                .shortDescription(dto.getShortDescription())
+                .fullDescription(dto.getFullDescription())
+                .seller(Seller.ofId(dto.getSellerId()))
+                .brand(Brand.ofId(dto.getBrandId()))
+                .status(dto.getStatus())
+                .build();
+    }
 }

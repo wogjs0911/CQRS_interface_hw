@@ -35,4 +35,8 @@ public class Brand {
 
     @Size(max = 255)
     private String website;
+
+    public static Brand ofId(Long id) {
+        return id == null ? null : Brand.builder().id(id).build();
+    }
 }

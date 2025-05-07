@@ -1,12 +1,9 @@
-package com.wanted.wantedshop.product.infrastructure.repository;
+package com.wanted.wantedshop.product.infrastructure.repository.custom;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.wanted.wantedshop.product.infrastructure.repository.custom.ProductRepositoryCustom;
 import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
 import com.wanted.wantedshop.product.model.dto.response.ProductSearchResponse;
 import com.wanted.wantedshop.product.model.entity.product.*;

@@ -43,4 +43,8 @@ public class Seller extends BaseEntity {
 
     @Size(max = 20)
     private String contactPhone;
+
+    public static Seller ofId(Long id) {
+        return id == null ? null : Seller.builder().id(id).build();
+    }
 }
