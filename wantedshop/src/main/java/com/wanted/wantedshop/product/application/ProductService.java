@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.beans.Transient;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,32 +23,29 @@ public class ProductService {
     private final ProductDetailRepository detailRepository;
     private final ProductPriceRepository priceRepository;
     private final ProductCategoryRepository categoryRepository;
-    private final ProductOptionRepository optionRepository;
     private final ProductOptionGroupRepository optionGroupRepository;
     private final ProductImageRepository imageRepository;
+
+    public Page<ProductSearchResponse> getProductsByConditions(ProductSearchRequest searchRequest) {
+        return repository.findProductsByConditions(searchRequest);
+    }
 
     public Product getListById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
     }
 
-    public Product getByName(String name) {
-        return repository.findByName(name)
-                .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
-    }
-
-    public Page<ProductSearchResponse> getProductsByConditions(ProductSearchRequest searchRequest) {
-        return repository.findProductsByConditions(searchRequest);
-    }
-
     @Transactional
     public Long saveProduct(ProductSaveRequest saveRequest) {
+        // TODO : PRODUCT createdAt, updatedAt 데이터 UPDATE , OPTIONS : option_group_id 데이터 INSERT , TAGS 데이터 INSERT
         // 1) 유효성 체크
-        repository.findBySellerId(saveRequest.getSellerId())
-            .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        Optional.of(repository.findBySellerId(saveRequest.getSellerId()))
+                .filter(list -> !list.isEmpty())
+                .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
 
-        repository.findByBrandId(saveRequest.getBrandId())
-            .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        Optional.of(repository.findByBrandId(saveRequest.getBrandId()))
+                .filter(list -> !list.isEmpty())
+                .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
 
         // 2) Product save
         Product product = repository.save(Product.from(saveRequest));
@@ -67,19 +63,17 @@ public class ProductService {
             .collect(Collectors.toList());
         categoryRepository.saveAll(productCategoryList);
 
-        // 6) ProductOption save
-        // TODO : 다시 수정하기
+        // 6) ProductOption getList
         List<ProductOption> productOptionsList = saveRequest.getOptionGroups()
             .stream()
             .flatMap(groupDto -> groupDto.getOptions().stream())
-            .map(dto -> ProductOption.from(dto))
+            .map(ProductOption::from)
             .collect(Collectors.toList());
-        optionRepository.saveAll(productOptionsList);
 
         // 7) ProductOptionGroup save
         List<ProductOptionGroup> productOptionGroupList = saveRequest.getOptionGroups()
             .stream()
-            .map(dto -> ProductOptionGroup.of(product.getId(), dto))
+            .map(dto -> ProductOptionGroup.of(product.getId(), dto, productOptionsList))
             .collect(Collectors.toList());
         optionGroupRepository.saveAll(productOptionGroupList);
 
@@ -91,13 +85,5 @@ public class ProductService {
         imageRepository.saveAll(productImageList);
 
         return product.getId();
-    }
-
-    public List<Product> getAllProductList() {
-        List<Product> productList = repository.findAll();
-        if (productList.isEmpty()) {
-            throw new ServiceException(ResultCode.VALID_NOT_NULL);
-        }
-        return productList;
     }
 }

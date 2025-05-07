@@ -48,7 +48,8 @@ public class Category {
     @Size(max = 255)
     private String imageUrl;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<ProductCategory> productCategories = new ArrayList<>();
 
     public static Category ofId(Long categoryId) {

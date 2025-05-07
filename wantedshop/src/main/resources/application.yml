@@ -1,16 +1,16 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/wanteddb
+    url: jdbc:p6spy:postgresql://localhost:5432/wanteddb
     username: root
     password: 1234
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
 
   jpa:
     hibernate:
       ddl-auto: none # 또는 validate, update, create, create-drop
       naming:
         physical-strategy: com.wanted.wantedshop.config.SnakeCasePhysicalNamingStrategy
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -18,13 +18,15 @@ spring:
         hibernate.default_batch_fetch_size: 1000    # 연관된 엔티티를 배치로 로딩
         hibernate.fetchSize: 1000                   # 단일 쿼리에서 한 번에 1000개 행 가져오기
 
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 
   # optional: logging tuning for SQL (dev only)
 logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
-
+    com.p6spy: debug  # P6Spy의 로깅 레벨을 debug로 설정
 
 server:
   port: 8081

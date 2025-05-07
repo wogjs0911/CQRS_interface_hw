@@ -51,13 +51,13 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @Size(max = 20)
     @NotNull
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<ProductCategory> categories = new ArrayList<>();
 
     public static Product from(ProductSaveRequest dto) {

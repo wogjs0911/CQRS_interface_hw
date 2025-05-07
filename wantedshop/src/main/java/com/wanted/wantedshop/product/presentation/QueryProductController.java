@@ -35,14 +35,4 @@ public class QueryProductController {
         return ResponseEntity
                 .ok(ResponseHandler.of(true, service.getListById(id), ResultCode.SUCCESS.getResultMessage()));
     }
-
-    @GetMapping("/name")
-    public Product getByName(String name) {
-        return service.getByName(name);
-    }
-
-    @GetMapping("/list")
-    public List<Product> getAllProductList() {
-        return service.getAllProductList();
-    }
 }
