@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum ResultCode {
     SUCCESS(200, ResultMessage.SUCCESS),
     SUCCESS_PRODUCTS(200, ResultMessage.SUCCESS_PRODUCTS),
-    INVALID_INPUT(401, ResultMessage.INVALID_INPUT),
+    INVALID_INPUT(400, ResultMessage.INVALID_INPUT),
     UNAUTHORIZED(401, ResultMessage.UNAUTHORIZED),
     FORBIDDEN(403, ResultMessage.FORBIDDEN),
     RESOURCE_NOT_FOUND(404, ResultMessage.RESOURCE_NOT_FOUND),
