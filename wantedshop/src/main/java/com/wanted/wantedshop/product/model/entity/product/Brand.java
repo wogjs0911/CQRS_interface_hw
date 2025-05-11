@@ -17,23 +17,10 @@ public class Brand {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false, length = 100)
-    private String name;
-
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false, length = 100)
-    private String slug;
-
-    @Column(length = Integer.MAX_VALUE)
+    @Column(nullable = false) private String name;
+    @Column(nullable = false) private String slug;
     private String description;
-
-    @Size(max = 255)
     private String logoUrl;
-
-    @Size(max = 255)
     private String website;
 
     public static Brand ofId(Long id) {

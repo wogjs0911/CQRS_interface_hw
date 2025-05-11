@@ -28,24 +28,10 @@ public class Category {
     @JoinColumn(name = "parent_id")
     private Category parentId;
 
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false, length = 100)
-    private String name;
-
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false, length = 100)
-    private String slug;
-
-    @Column(length = Integer.MAX_VALUE)
+    @Column(nullable = false) private String name;
+    @Column(nullable = false) private String slug;
     private String description;
-
-    @NotNull
-    @Column(nullable = false)
-    private Integer level;
-
-    @Size(max = 255)
+    @Column(nullable = false) private Integer level;
     private String imageUrl;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)

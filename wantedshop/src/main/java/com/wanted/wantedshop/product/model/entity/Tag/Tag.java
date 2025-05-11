@@ -17,14 +17,10 @@ public class Tag {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false, length = 100)
-    private String name;
+    @Column(nullable = false) private String name;
+    @Column(nullable = false) private String slug;
 
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false, length = 100)
-    private String slug;
-
+    public static Tag ofId(Long id) {
+        return id == null ? null : Tag.builder().id(id).build();
+    }
 }

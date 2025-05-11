@@ -26,21 +26,9 @@ public class Product extends BaseEntity {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(nullable = false)
-    private String name;
-
-    @Size(max = 255)
-    @NotNull
-    @Column(nullable = false)
-    private String slug;
-
-    @Size(max = 500)
-    @Column(length = 500)
+    @Column(nullable = false) private String name;
+    @Column(nullable = false) private String slug;
     private String shortDescription;
-
-    @Column(length = Integer.MAX_VALUE)
     private String fullDescription;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,8 +39,6 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @NotNull
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 

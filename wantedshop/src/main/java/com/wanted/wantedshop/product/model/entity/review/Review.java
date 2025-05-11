@@ -36,19 +36,9 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
-    @Column(nullable = false)
-    private Integer rating;
-
-    @Size(max = 255)
+    @Column(nullable = false) private Integer rating;
     private String title;
-
-    @Column(length = Integer.MAX_VALUE)
     private String content;
-
-    @ColumnDefault("false")
     private Boolean verifiedPurchase;
-
-    @ColumnDefault("0")
     private Integer helpfulVotes;
 }

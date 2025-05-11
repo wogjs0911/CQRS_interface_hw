@@ -24,24 +24,11 @@ public class Seller extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 100)
-    @NotNull
-    @Column(nullable = false)
-    private String name;
-
-    @Column(length = Integer.MAX_VALUE)
+    @Column(nullable = false) private String name;
     private String description;
-
-    @Size(max = 255)
     private String logoUrl;
-
-    @Column(precision = 3, scale = 2)
     private BigDecimal rating;
-
-    @Size(max = 100)
     private String contactEmail;
-
-    @Size(max = 20)
     private String contactPhone;
 
     public static Seller ofId(Long id) {
