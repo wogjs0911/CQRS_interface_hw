@@ -30,23 +30,14 @@ public class ProductDetail {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(precision = 10, scale = 2)
     private BigDecimal weight;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private DimensionsInfo dimensions;
 
-    @Column(length = Integer.MAX_VALUE)
     private String materials;
-
-    @Size(max = 100)
-    @Column(length = 100)
     private String countryOfOrigin;
-
-    @Column(length = Integer.MAX_VALUE)
     private String warrantyInfo;
-
-    @Column(length = Integer.MAX_VALUE)
     private String careInstructions;
 
     @JdbcTypeCode(SqlTypes.JSON)

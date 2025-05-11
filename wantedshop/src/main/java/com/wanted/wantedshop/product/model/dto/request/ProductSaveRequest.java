@@ -1,11 +1,14 @@
 package com.wanted.wantedshop.product.model.dto.request;
 
+import com.wanted.wantedshop.common.BaseEntity;
+import com.wanted.wantedshop.common.exception.BaseResDto;
 import com.wanted.wantedshop.product.model.entity.product.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -21,11 +24,10 @@ public class ProductSaveRequest {
     @NotNull private Long sellerId;
     @NotNull private Long brandId;
     @NotNull private ProductStatus status;
-
     private ProductDetailDto detail;
     private ProductPriceDto price;
-    private List<ProductCategoryDto> categories;    // 이거 영속성 에러 발생할 수 있다.
+    private List<ProductCategoryDto> categories;
     private List<ProductOptionGroupDto> optionGroups;
     private List<ProductImageDto> images;
-    private List<Integer> tags;
+    private List<Long> tags;
 }

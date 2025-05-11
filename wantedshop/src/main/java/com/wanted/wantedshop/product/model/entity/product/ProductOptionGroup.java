@@ -31,15 +31,17 @@ public class ProductOptionGroup {
     @Builder.Default
     private List<ProductOption> productOptions = new ArrayList<>();
 
-    @ColumnDefault("0")
     private Integer displayOrder;
 
-    public static ProductOptionGroup of(Long productId, ProductOptionGroupDto dto, List<ProductOption> productOptionsList) {
+    public static ProductOptionGroup ofId(Long optionGroupId) {
+        return optionGroupId == null ? null : ProductOptionGroup.builder().id(optionGroupId).build();
+    }
+
+    public static ProductOptionGroup of(Long productId, ProductOptionGroupDto dto) {
         return ProductOptionGroup.builder()
                 .product(Product.ofId(productId))
                 .name(dto.getName())
                 .displayOrder(dto.getDisplayOrder())
-                .productOptions(productOptionsList)
                 .build();
     }
 }

@@ -23,7 +23,7 @@ public class ProductSearchResponse extends BaseResDto {
     private Seller seller;
     private String brandName;
     private String primaryImage;
-    private BigDecimal rating;
+    private Double rating;
     private Integer reviewCount;
     private Boolean inStock;
     private String status;
@@ -40,6 +40,6 @@ public class ProductSearchResponse extends BaseResDto {
         this.salePrice = salePrice;
         this.primaryImage = primaryImage;
         this.brandName = brandName;
-        this.rating = BigDecimal.valueOf(rating);  // rating은 BigDecimal로 변환
+        this.rating = rating;  // rating은 BigDecimal로 변환
     }
 }

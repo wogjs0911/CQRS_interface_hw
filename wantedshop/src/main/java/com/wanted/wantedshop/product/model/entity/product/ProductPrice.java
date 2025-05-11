@@ -28,21 +28,10 @@ public class ProductPrice {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @NotNull
-    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal basePrice;
-
-    @Column(precision = 12, scale = 2)
     private BigDecimal salePrice;
-
-    @Column(precision = 12, scale = 2)
     private BigDecimal costPrice;
-
-    @Size(max = 3)
-    @ColumnDefault("'KRW'")
     private String currency;
-
-    @Column(precision = 5, scale = 2)
     private BigDecimal taxRate;
 
     public static ProductPrice of(Long productId, ProductPriceDto dto) {

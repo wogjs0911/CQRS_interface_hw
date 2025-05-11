@@ -30,7 +30,6 @@ public class ProductCategory {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ColumnDefault("false")
     private Boolean isPrimary;
 
     public static ProductCategory of(Long productId, ProductCategoryDto dto) {

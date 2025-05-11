@@ -14,12 +14,4 @@ public class ProductPriceDto {
     private BigDecimal costPrice;
     private String currency;
     private BigDecimal taxRate;
-
-// "price": {
-//   "base_price": 599000,
-//   "sale_price": 499000,
-//   "cost_price": 350000,
-//   "currency": "KRW",
-//   "tax_rate": 10
-// },
 }

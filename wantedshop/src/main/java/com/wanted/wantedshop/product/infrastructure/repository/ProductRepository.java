@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
     List<Product> findByBrandId(Long brandId);
     List<Product> findBySellerId(Long sellerId);
+    List<Product> findBySlug(String slug);
 }

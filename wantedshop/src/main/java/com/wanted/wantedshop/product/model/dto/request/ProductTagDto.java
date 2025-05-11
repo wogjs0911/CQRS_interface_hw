@@ -1,12 +1,10 @@
 package com.wanted.wantedshop.product.model.dto.request;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ProductCategoryDto {
-    private Long categoryId;
-    private Boolean isPrimary;
+public class ProductTagDto {
+    private Long tagId;
 }
