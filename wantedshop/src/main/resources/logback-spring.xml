@@ -40,7 +40,6 @@
     <root>
         <level value="INFO" />
         <!--     참조할 appender 설정 - STDOUT -->
-        <appender-ref ref="ASYNC_SLACK" />
         <appender-ref ref="STDOUT" />
     </root>
 
