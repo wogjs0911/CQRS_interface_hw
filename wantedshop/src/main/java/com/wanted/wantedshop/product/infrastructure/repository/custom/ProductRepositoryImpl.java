@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.querydsl.jpa.JPAExpressions.select;
 import static com.wanted.wantedshop.common.SortUtil.parseMultiSortString;
 
 @RequiredArgsConstructor
@@ -43,7 +44,12 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                         product.shortDescription,
                         productPrice.basePrice,
                         productPrice.salePrice,
-                        productImage.url, // primaryImage는 String으로 반환
+                        (select(productImage.url)
+                                .from(productImage)
+                                .where(productImage.product.eq(product)
+                                        .and(productImage.isPrimary.isTrue()))
+                                .orderBy(productImage.displayOrder.asc())
+                                .limit(1)), // 대표 이미지 1개만
                         brand.name.as("brandName"), // brand.name을 "brandName"으로 매핑
                         review.rating.avg() // 평균 평점은 Double로 반환
                 ))
@@ -51,10 +57,9 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                 .leftJoin(seller).on(seller.eq(product.seller))
                 .leftJoin(brand).on(brand.eq(product.brand))
                 .leftJoin(productPrice).on(productPrice.product.eq(product))
-                .leftJoin(productImage).on(productImage.product.eq(product))
                 .leftJoin(review).on(review.product.eq(product))
                 .where(buildSearchCondition(searchRequest))
-                .groupBy(product.id, productPrice.id, productImage.url, brand.name)
+                .groupBy(product.id, productPrice.id, brand.name)
                 .orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]))
                 .offset((long) searchRequest.getPage() * searchRequest.getPerPage())  // 페이지네이션 처리
                 .limit(searchRequest.getPerPage())  // 페이지네이션 처리
@@ -67,7 +72,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                 .leftJoin(seller).on(seller.eq(product.seller))
                 .leftJoin(brand).on(brand.eq(product.brand))
                 .leftJoin(productPrice).on(productPrice.product.eq(product))
-                .leftJoin(productImage).on(productImage.product.eq(product))
                 .leftJoin(review).on(review.product.eq(product))
                 .where(buildSearchCondition(searchRequest))
                 .fetchOne();
