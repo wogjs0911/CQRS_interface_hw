@@ -114,4 +114,12 @@ public class ProductService {
         product.update(saveRequest);
         return product.getId();
     }
+
+    @Transactional
+    public Long deleteProduct(Long id, ProductSaveRequest saveRequest) {
+        Product product = repository.findById(id)
+                .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        repository.delete(product);
+        return product.getId();
+    }
 }

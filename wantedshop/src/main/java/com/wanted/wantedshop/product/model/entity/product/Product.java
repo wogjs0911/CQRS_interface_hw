@@ -66,4 +66,8 @@ public class Product extends BaseEntity {
         this.brand = Brand.ofId(saveRequest.getBrandId());
         this.status = saveRequest.getStatus();
     }
+
+    public void delete(ProductSaveRequest saveRequest) {
+
+    }
 }

@@ -23,7 +23,7 @@ public class CommandProductController {
             ResponseHandler.of(
                     true,
                     resultCount,
-                    ResultCode.SUCCESS_PRODUCTS.getResultMessage()
+                    ResultCode.SUCCESS.getResultMessage()
             )
         );
     }
@@ -34,6 +34,17 @@ public class CommandProductController {
             ResponseHandler.of(
                 true,
                 service.updateProduct(id, saveRequest),
+                ResultCode.SUCCESS.getResultMessage()
+            )
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseHandler<Long>> deleteProduct(@PathVariable("id") Long id, @RequestBody ProductSaveRequest saveRequest) {
+        return ResponseEntity.ok(
+            ResponseHandler.of(
+                true,
+                service.deleteProduct(id, saveRequest),
                 ResultCode.SUCCESS.getResultMessage()
             )
         );
