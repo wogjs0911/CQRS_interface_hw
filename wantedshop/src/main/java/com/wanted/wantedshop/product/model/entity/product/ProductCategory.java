@@ -1,7 +1,6 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
-import com.wanted.wantedshop.product.model.dto.request.ProductCategoryDto;
-import com.wanted.wantedshop.product.model.dto.request.ProductPriceDto;
+import com.wanted.wantedshop.product.model.dto.request.*;
 import com.wanted.wantedshop.product.model.entity.category.Category;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,4 +39,8 @@ public class ProductCategory {
                 .build();
     }
 
+    public void update(ProductCategoryDto dto) {
+        this.category = Category.ofId(dto.getCategoryId());
+        this.isPrimary = dto.getIsPrimary();
+    }
 }

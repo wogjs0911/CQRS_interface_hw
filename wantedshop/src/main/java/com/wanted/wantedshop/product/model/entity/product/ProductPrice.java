@@ -1,12 +1,8 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
-import com.wanted.wantedshop.product.model.dto.request.ProductDetailDto;
 import com.wanted.wantedshop.product.model.dto.request.ProductPriceDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -43,5 +39,13 @@ public class ProductPrice {
                 .currency(dto.getCurrency())
                 .taxRate(dto.getTaxRate())
                 .build();
+    }
+
+    public void update(ProductPriceDto dto) {
+        this.basePrice = dto.getBasePrice();
+        this.salePrice = dto.getSalePrice();
+        this.costPrice = dto.getCostPrice();
+        this.currency = dto.getCurrency();
+        this.taxRate = dto.getTaxRate();
     }
 }

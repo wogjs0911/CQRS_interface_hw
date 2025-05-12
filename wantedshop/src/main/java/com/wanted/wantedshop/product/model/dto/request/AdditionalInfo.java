@@ -1,11 +1,13 @@
 package com.wanted.wantedshop.product.model.dto.request;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Embeddable;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
+@Embeddable
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@EqualsAndHashCode
 public class AdditionalInfo {
     private Boolean assemblyRequired;
     private String assemblyTime;

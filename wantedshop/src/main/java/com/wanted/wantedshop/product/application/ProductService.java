@@ -3,6 +3,7 @@ package com.wanted.wantedshop.product.application;
 import com.wanted.wantedshop.common.exception.ResultCode;
 import com.wanted.wantedshop.common.exception.ServiceException;
 import com.wanted.wantedshop.product.infrastructure.repository.*;
+import com.wanted.wantedshop.product.model.dto.request.ProductCategoryDto;
 import com.wanted.wantedshop.product.model.dto.request.ProductOptionGroupDto;
 import com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest;
 import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
@@ -13,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -112,6 +113,27 @@ public class ProductService {
         Product product = repository.findById(id)
                 .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
         product.update(saveRequest);
+
+        ProductDetail detail = detailRepository.findByProductId(id)
+            .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        detail.update(saveRequest.getDetail());
+
+        ProductPrice price = priceRepository.findByProductId(id)
+                .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        price.update(saveRequest.getPrice());
+
+        List<ProductCategory> categories = Optional.of(categoryRepository.findByProductId(id))
+            .filter(list -> !list.isEmpty())
+            .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+
+        List<ProductCategoryDto> productCategoryDto = saveRequest.getCategories();
+
+        IntStream.range(0, productCategoryDto.size())
+            .forEach(i -> {
+                ProductCategory category = categories.get(i);
+                category.update(productCategoryDto.get(i));
+            });
+
         return product.getId();
     }
 

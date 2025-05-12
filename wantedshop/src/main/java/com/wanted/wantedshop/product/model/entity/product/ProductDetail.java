@@ -4,7 +4,6 @@ import com.wanted.wantedshop.product.model.dto.request.AdditionalInfo;
 import com.wanted.wantedshop.product.model.dto.request.DimensionsInfo;
 import com.wanted.wantedshop.product.model.dto.request.ProductDetailDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.OnDelete;
@@ -12,7 +11,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 @Entity
 @Table(name = "product_details")
@@ -32,6 +30,8 @@ public class ProductDetail {
 
     private BigDecimal weight;
 
+    /* VO(불변객체)를 만들기 위해서 @Embedded를 사용해야하는데 해당 JSON 구조가 DB에도 같은 구조의 칼럼이 존재해야 한다.
+       입력 값이 JSON 구조라면 @Embedded 대신해서 @JdbcTypeCode(SqlTypes.JSON)를 사용해야 한다. */
     @JdbcTypeCode(SqlTypes.JSON)
     private DimensionsInfo dimensions;
 
@@ -41,18 +41,43 @@ public class ProductDetail {
     private String careInstructions;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private AdditionalInfo additionalInfo;
+    private AdditionalInfo additionalInfo; // VO로 수정
 
     public static ProductDetail of(Long productId, ProductDetailDto dto) {
         return ProductDetail.builder()
                 .product(Product.ofId(productId))
                 .weight(dto.getWeight())
-                .dimensions(dto.getDimensions())
+                .dimensions(new DimensionsInfo(
+                        dto.getDimensions().getDepth(),
+                        dto.getDimensions().getWidth(),
+                        dto.getDimensions().getHeight())
+                )
                 .materials(dto.getMaterials())
                 .countryOfOrigin(dto.getCountryOfOrigin())
                 .warrantyInfo(dto.getWarrantyInfo())
                 .careInstructions(dto.getCareInstructions())
-                .additionalInfo(dto.getAdditionalInfo())
+                .additionalInfo(new AdditionalInfo(
+                        dto.getAdditionalInfo().getAssemblyRequired(),
+                        dto.getAdditionalInfo().getAssemblyTime())
+                )
                 .build();
+    }
+
+    /* 이렇게 하는 이유 : 객체의 직접 참조 대입은 얕은 복사라서 깊은 복사를 위해 VO로 만들어 진행 */
+    public void update(ProductDetailDto dto) {
+        this.weight = dto.getWeight();
+        this.dimensions = new DimensionsInfo(
+                        dto.getDimensions().getDepth(),
+                        dto.getDimensions().getWidth(),
+                        dto.getDimensions().getWidth()
+        );
+        this.materials = dto.getMaterials();
+        this.countryOfOrigin = dto.getCountryOfOrigin();
+        this.warrantyInfo = dto.getWarrantyInfo();
+        this.careInstructions = dto.getCareInstructions();
+        this.additionalInfo = new AdditionalInfo(
+                        dto.getAdditionalInfo().getAssemblyRequired(),
+                        dto.getAdditionalInfo().getAssemblyTime()
+        );
     }
 }
