@@ -1,18 +1,13 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
 import com.wanted.wantedshop.common.BaseEntity;
-import com.wanted.wantedshop.common.exception.BaseResDto;
 import com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -46,6 +41,10 @@ public class Product extends BaseEntity {
     @Builder.Default
     private List<ProductCategory> categories = new ArrayList<>();
 
+    public static Product ofId(Long id) {
+        return id != null ? Product.builder().id(id).build() : null;
+    }
+
     public static Product from(ProductSaveRequest dto) {
         return Product.builder()
                 .name(dto.getName())
@@ -58,7 +57,13 @@ public class Product extends BaseEntity {
                 .build();
     }
 
-    public static Product ofId(Long id) {
-        return id != null ? Product.builder().id(id).build() : null;
+    public void update(ProductSaveRequest saveRequest) {
+        this.name = saveRequest.getName();
+        this.slug = saveRequest.getSlug();
+        this.fullDescription = saveRequest.getFullDescription();
+        this.shortDescription = saveRequest.getShortDescription();
+        this.seller = Seller.ofId(saveRequest.getSellerId());
+        this.brand = Brand.ofId(saveRequest.getBrandId());
+        this.status = saveRequest.getStatus();
     }
 }

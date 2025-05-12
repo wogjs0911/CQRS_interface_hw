@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.Result;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -103,6 +104,14 @@ public class ProductService {
                 .collect(Collectors.toList());
         tagRepository.saveAll(productTagDtoList);
 
+        return product.getId();
+    }
+
+    @Transactional
+    public Long updateProduct(Long id, ProductSaveRequest saveRequest) {
+        Product product = repository.findById(id)
+                .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        product.update(saveRequest);
         return product.getId();
     }
 }

@@ -28,5 +28,14 @@ public class CommandProductController {
         );
     }
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<ResponseHandler<Long>> updateProduct(@PathVariable("id") Long id, @RequestBody ProductSaveRequest saveRequest) {
+        return ResponseEntity.ok(
+            ResponseHandler.of(
+                true,
+                service.updateProduct(id, saveRequest),
+                ResultCode.SUCCESS.getResultMessage()
+            )
+        );
+    }
 }
