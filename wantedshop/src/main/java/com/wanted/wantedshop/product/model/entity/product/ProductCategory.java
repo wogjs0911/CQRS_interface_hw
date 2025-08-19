@@ -1,10 +1,9 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
-import com.wanted.wantedshop.product.model.dto.request.*;
+import com.wanted.wantedshop.product.model.dto.request.ProductCategoryDto;
 import com.wanted.wantedshop.product.model.entity.category.Category;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -31,11 +30,11 @@ public class ProductCategory {
 
     private Boolean isPrimary;
 
-    public static ProductCategory of(Long productId, ProductCategoryDto dto) {
+    public static ProductCategory of(Product product, Category category, ProductCategoryDto categoryDto) {
         return ProductCategory.builder()
-                .product(Product.ofId(productId))
-                .category(Category.ofId(dto.getCategoryId()))
-                .isPrimary(dto.getIsPrimary())
+                .product(product)
+                .category(category)
+                .isPrimary(categoryDto.getIsPrimary())
                 .build();
     }
 

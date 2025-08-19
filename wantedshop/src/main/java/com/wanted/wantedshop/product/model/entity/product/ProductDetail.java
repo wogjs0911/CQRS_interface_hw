@@ -23,9 +23,9 @@ public class ProductDetail {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false, unique = true)
     private Product product;
 
     private BigDecimal weight;
@@ -43,9 +43,9 @@ public class ProductDetail {
     @JdbcTypeCode(SqlTypes.JSON)
     private AdditionalInfo additionalInfo; // VO로 수정
 
-    public static ProductDetail of(Long productId, ProductDetailDto dto) {
+    public static ProductDetail of(Product product, ProductDetailDto dto) {
         return ProductDetail.builder()
-                .product(Product.ofId(productId))
+                .product(product)
                 .weight(dto.getWeight())
                 .dimensions(new DimensionsInfo(
                         dto.getDimensions().getDepth(),

@@ -1,12 +1,8 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
-import com.wanted.wantedshop.product.model.dto.request.ProductDetailDto;
 import com.wanted.wantedshop.product.model.dto.request.ProductImageDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -37,14 +33,14 @@ public class ProductImage {
     @JoinColumn(name = "option_id")
     private ProductOption option;
 
-    public static ProductImage of(Long productId, ProductImageDto dto) {
+    public static ProductImage of(ProductImageDto dto, Product product, ProductOption option) {
         return ProductImage.builder()
-                .product(Product.ofId(productId))
+                .product(product)
                 .url(dto.getUrl())
                 .altText(dto.getAltText())
                 .isPrimary(dto.getIsPrimary())
                 .displayOrder(dto.getDisplayOrder())
-                .option(ProductOption.ofId(dto.getOptionId()))
+                .option(option)
                 .build();
     }
 }

@@ -1,6 +1,5 @@
 package com.wanted.wantedshop.product.model.entity.product;
 
-import com.wanted.wantedshop.product.model.dto.request.ProductTagDto;
 import com.wanted.wantedshop.product.model.entity.Tag.Tag;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,10 +27,10 @@ public class ProductTag {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    public static ProductTag of(Long productId, Long tag){
+    public static ProductTag of(Product product, Tag tag){
         return ProductTag.builder()
-                .product(Product.ofId(productId))
-                .tag(Tag.ofId(tag))
+                .product(product)
+                .tag(tag)
                 .build();
 
     }

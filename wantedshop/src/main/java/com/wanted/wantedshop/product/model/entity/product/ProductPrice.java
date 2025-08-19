@@ -19,9 +19,9 @@ public class ProductPrice {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false, unique = true)
     private Product product;
 
     private BigDecimal basePrice;
@@ -30,9 +30,9 @@ public class ProductPrice {
     private String currency;
     private BigDecimal taxRate;
 
-    public static ProductPrice of(Long productId, ProductPriceDto dto) {
+    public static ProductPrice of(Product product, ProductPriceDto dto) {
         return ProductPrice.builder()
-                .product(Product.ofId(productId))
+                .product(product)
                 .basePrice(dto.getBasePrice())
                 .salePrice(dto.getSalePrice())
                 .costPrice(dto.getCostPrice())

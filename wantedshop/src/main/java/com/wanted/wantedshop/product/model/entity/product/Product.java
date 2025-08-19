@@ -37,9 +37,36 @@ public class Product extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProductDetail detail;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProductPrice price;
+
+//    // Category를 ManyToMany 관계로 직접 참조 -> 원래 ManyToMany에서 이런게 존재해야되는데 ManyToMany는 실무에 적합하지 않음
+//    ** 따라서, ProductCategory와 같은 중간테이블 생성
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name = "product_categories",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "category_id")
+//    )
+    // ** List같은 Collection 경우 Builder.Default가 필요하다
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<ProductCategory> categories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ProductOptionGroup> optionGroups = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ProductTag> tags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ProductImage> images = new ArrayList<>();
 
     public static Product ofId(Long id) {
         return id != null ? Product.builder().id(id).build() : null;
@@ -65,5 +92,13 @@ public class Product extends BaseEntity {
         this.seller = Seller.ofId(saveRequest.getSellerId());
         this.brand = Brand.ofId(saveRequest.getBrandId());
         this.status = saveRequest.getStatus();
+    }
+
+    public void updateProductEntity(ProductSaveRequest dto) {
+        this.name = dto.getName();
+        this.slug = dto.getSlug();
+        this.fullDescription = dto.getFullDescription();
+        this.shortDescription = dto.getShortDescription();
+        this.status = dto.getStatus();
     }
 }

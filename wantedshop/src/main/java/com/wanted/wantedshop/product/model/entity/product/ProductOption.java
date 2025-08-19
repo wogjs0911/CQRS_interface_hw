@@ -2,10 +2,7 @@ package com.wanted.wantedshop.product.model.entity.product;
 
 import com.wanted.wantedshop.product.model.dto.request.ProductOptionDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -37,9 +34,9 @@ public class ProductOption {
         return optionId == null ? null : ProductOption.builder().id(optionId).build();
     }
 
-    public static ProductOption of(Long optionGroupId, ProductOptionDto dto) {
+    public static ProductOption of(ProductOptionGroup optionGroup, ProductOptionDto dto) {
         return ProductOption.builder()
-                .optionGroup(ProductOptionGroup.ofId(optionGroupId))
+                .optionGroup(optionGroup)
                 .name(dto.getName())
                 .additionalPrice(dto.getAdditionalPrice())
                 .sku(dto.getSku())

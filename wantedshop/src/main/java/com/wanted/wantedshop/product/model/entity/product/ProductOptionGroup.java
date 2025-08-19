@@ -3,7 +3,6 @@ package com.wanted.wantedshop.product.model.entity.product;
 import com.wanted.wantedshop.product.model.dto.request.ProductOptionGroupDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -37,9 +36,9 @@ public class ProductOptionGroup {
         return optionGroupId == null ? null : ProductOptionGroup.builder().id(optionGroupId).build();
     }
 
-    public static ProductOptionGroup of(Long productId, ProductOptionGroupDto dto) {
+    public static ProductOptionGroup of(Product product, ProductOptionGroupDto dto) {
         return ProductOptionGroup.builder()
-                .product(Product.ofId(productId))
+                .product(product)
                 .name(dto.getName())
                 .displayOrder(dto.getDisplayOrder())
                 .build();
