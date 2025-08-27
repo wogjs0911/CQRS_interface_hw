@@ -4,6 +4,7 @@ import com.wanted.wantedshop.common.exception.ResultCode;
 import com.wanted.wantedshop.common.exception.ServiceException;
 import com.wanted.wantedshop.product.infrastructure.repository.*;
 import com.wanted.wantedshop.product.model.dto.request.*;
+import com.wanted.wantedshop.product.model.dto.response.ProductResponse;
 import com.wanted.wantedshop.product.model.dto.response.ProductSearchResponse;
 import com.wanted.wantedshop.product.model.entity.Tag.Tag;
 import com.wanted.wantedshop.product.model.entity.category.Category;
@@ -36,9 +37,10 @@ public class ProductService {
         return repository.findProductsByConditions(searchRequest);
     }
 
-    public Product getListById(Long id) {
-        return repository.findById(id)
+    public ProductResponse getListById(Long id) {
+        Product product = repository.findById(id)
                 .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
+        return ProductResponse.from(product);
     }
 
     @Transactional
@@ -51,7 +53,7 @@ public class ProductService {
         if(saveRequest.getSellerId() != null){
            Seller seller = sellerRepository.findById(saveRequest.getSellerId())
                      .orElseThrow(() -> new ServiceException(ResultCode.VALID_NOT_NULL));
-           product.setSeller(seller);
+            product.setSeller(seller);
         }
 
         if(saveRequest.getBrandId() != null){

@@ -1,0 +1,197 @@
+[2025-08-19 09:03:17:5620] DEBUG 27484 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 09:03:18:5706] DEBUG 27484 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 09:03:18:5764] DEBUG 27484 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 09:03:18:5803] DEBUG 27484 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 09:10:42:450088] INFO  27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 09:10:42:450089] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 09:10:42:450089] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 09:10:42:450089] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 09:10:42:450090] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5d729af6
+[2025-08-19 09:10:42:450090] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@48064a5a
+[2025-08-19 09:10:42:450090] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 09:10:42:450090] INFO  27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2025-08-19 09:10:42:450099] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/products?page=1&perPage=10&sort=created_at:desc&status=ACTIVE&minPrice=1000&category=1&seller=1&brand=1&inStock=true&search=%EC%8B%A0%EB%B0%9C", parameters={masked}
+[2025-08-19 09:10:42:450109] DEBUG 27484 --- [nio-8081-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.QueryProductController#getProductsByConditions(ProductSearchRequest)
+[2025-08-19 09:10:43:450784] DEBUG 27484 --- [nio-8081-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 09:10:43:450786] DEBUG 27484 --- [nio-8081-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=Page 2 of 11 containing com.wanted.wantedshop.product.model.dto.r (truncated)...]
+[2025-08-19 09:10:43:450816] DEBUG 27484 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 09:10:54:462420] DEBUG 27484 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 09:10:54:462420] DEBUG 27484 --- [nio-8081-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 09:10:54:462473] DEBUG 27484 --- [nio-8081-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@22ffd90a]
+[2025-08-19 09:10:55:462682] DEBUG 27484 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 09:10:55:462683] DEBUG 27484 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=39, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 09:10:55:462685] DEBUG 27484 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 13:12:22:3863] DEBUG 21812 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 13:12:22:3916] DEBUG 21812 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 13:12:22:3943] DEBUG 21812 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 13:12:22:3969] DEBUG 21812 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 13:13:15:57700] INFO  21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 13:13:15:57700] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 13:13:15:57700] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 13:13:15:57700] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 13:13:15:57701] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@7df994ec
+[2025-08-19 13:13:15:57701] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@240fa4ad
+[2025-08-19 13:13:15:57701] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 13:13:15:57702] INFO  21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2025-08-19 13:13:15:57711] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 13:13:15:57731] DEBUG 21812 --- [nio-8081-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 13:13:16:57860] DEBUG 21812 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@28b2f8f7]
+[2025-08-19 13:13:35:77506] DEBUG 21812 --- [nio-8081-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.wanted.wantedshop.common.exception.GlobalExceptionHandler#exception(Exception)
+[2025-08-19 13:13:35:77532] DEBUG 21812 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 13:13:35:77533] DEBUG 21812 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.wanted.wantedshop.common.exception.BaseResDto@7aa6644d]
+[2025-08-19 13:13:35:77542] DEBUG 21812 --- [nio-8081-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select s1_0.id,s1_0.contact_email,s1_0.contact_phone,s1_0.created_at,s1_0.description,s1_0.logo_url,s1_0.name,s1_0.rating,s1_0.updated_at from sellers s1_0 where s1_0.id=?] [ERROR: column s1_0.updated_at does not exist<EOL>  Hint: Perhaps you meant to reference the column "s1_0.created_at".<EOL>  Position: 123] [n/a]; SQL [n/a]]
+[2025-08-19 13:13:35:77543] DEBUG 21812 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 13:16:52:274676] DEBUG 21812 --- [nio-8081-exec-6] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 13:16:52:274676] DEBUG 21812 --- [nio-8081-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 13:16:52:274677] DEBUG 21812 --- [nio-8081-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@1543b578]
+[2025-08-19 13:17:30:312745] DEBUG 21812 --- [nio-8081-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.wanted.wantedshop.common.exception.GlobalExceptionHandler#exception(ServiceException)
+[2025-08-19 13:17:30:312746] DEBUG 21812 --- [nio-8081-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 13:17:30:312746] DEBUG 21812 --- [nio-8081-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.wanted.wantedshop.common.exception.BaseResDto@50634257]
+[2025-08-19 13:17:30:312746] DEBUG 21812 --- [nio-8081-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.wanted.wantedshop.common.exception.ServiceException]
+[2025-08-19 13:17:30:312746] DEBUG 21812 --- [nio-8081-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 13:21:08:530597] DEBUG 21812 --- [nio-8081-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 13:21:08:530598] DEBUG 21812 --- [nio-8081-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 13:21:08:530599] DEBUG 21812 --- [nio-8081-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@1ee1834d]
+[2025-08-19 13:23:39:681508] DEBUG 21812 --- [nio-8081-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.wanted.wantedshop.common.exception.GlobalExceptionHandler#exception(Exception)
+[2025-08-19 13:23:39:681509] DEBUG 21812 --- [nio-8081-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 13:23:39:681509] DEBUG 21812 --- [nio-8081-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.wanted.wantedshop.common.exception.BaseResDto@18621582]
+[2025-08-19 13:23:39:681510] DEBUG 21812 --- [nio-8081-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.NullPointerException: Cannot invoke "java.util.List.addAll(java.util.Collection)" because the return value of "com.wanted.wantedshop.product.model.entity.product.Product.getCategories()" is null]
+[2025-08-19 13:23:39:681510] DEBUG 21812 --- [nio-8081-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 13:27:22:3942] DEBUG 26860 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 13:27:22:3997] DEBUG 26860 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 13:27:22:4026] DEBUG 26860 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 13:27:22:4055] DEBUG 26860 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 13:28:11:53149] INFO  26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 13:28:11:53149] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 13:28:11:53151] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 13:28:11:53151] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 13:28:11:53152] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1c8da7e8
+[2025-08-19 13:28:11:53152] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@4fb3c670
+[2025-08-19 13:28:11:53152] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 13:28:11:53152] INFO  26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+[2025-08-19 13:28:11:53161] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 13:28:11:53176] DEBUG 26860 --- [nio-8081-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 13:28:11:53293] DEBUG 26860 --- [nio-8081-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@55d0fc22]
+[2025-08-19 13:30:52:214363] DEBUG 26860 --- [nio-8081-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.wanted.wantedshop.common.exception.GlobalExceptionHandler#exception(Exception)
+[2025-08-19 13:30:52:214393] DEBUG 26860 --- [nio-8081-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 13:30:52:214394] DEBUG 26860 --- [nio-8081-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.wanted.wantedshop.common.exception.BaseResDto@51d2f6b1]
+[2025-08-19 13:30:52:214403] DEBUG 26860 --- [nio-8081-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction]
+[2025-08-19 13:30:52:214404] DEBUG 26860 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 13:59:20:1922786] DEBUG 26860 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 13:59:20:1922814] DEBUG 26860 --- [nio-8081-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 13:59:21:1922878] DEBUG 26860 --- [nio-8081-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@5b5d4f23]
+[2025-08-19 14:01:46:2067856] DEBUG 26860 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 14:01:46:2067862] DEBUG 26860 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=42, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 14:01:46:2067872] DEBUG 26860 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 14:05:50:2312435] DEBUG 26860 --- [nio-8081-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 14:05:50:2312436] DEBUG 26860 --- [nio-8081-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 14:05:50:2312438] DEBUG 26860 --- [nio-8081-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@52692149]
+[2025-08-19 14:22:52:3333921] DEBUG 26860 --- [nio-8081-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.wanted.wantedshop.common.exception.GlobalExceptionHandler#exception(Exception)
+[2025-08-19 14:22:52:3333943] DEBUG 26860 --- [nio-8081-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 14:22:52:3333944] DEBUG 26860 --- [nio-8081-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.wanted.wantedshop.common.exception.BaseResDto@58099564]
+[2025-08-19 14:22:52:3333954] DEBUG 26860 --- [nio-8081-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.hibernate.AssertionFailure: collection owner not associated with session: com.wanted.wantedshop.product.model.entity.product.Product.categories]
+[2025-08-19 14:22:52:3333956] DEBUG 26860 --- [nio-8081-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 15:51:33:3573] DEBUG 27260 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 15:51:33:3626] DEBUG 27260 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 15:51:33:3658] DEBUG 27260 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 15:51:33:3688] DEBUG 27260 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 15:52:03:33519] INFO  27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 15:52:03:33519] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 15:52:03:33519] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 15:52:03:33519] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 15:52:03:33520] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@174e5929
+[2025-08-19 15:52:03:33520] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@77b0ff24
+[2025-08-19 15:52:03:33520] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 15:52:03:33520] INFO  27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2025-08-19 15:52:03:33527] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/products", parameters={}
+[2025-08-19 15:52:03:33538] DEBUG 27260 --- [nio-8081-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#saveProduct(ProductSaveRequest)
+[2025-08-19 15:52:03:33629] DEBUG 27260 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@7e76fe7]
+[2025-08-19 15:53:01:91132] DEBUG 27260 --- [nio-8081-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 15:53:01:91134] DEBUG 27260 --- [nio-8081-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=44, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 15:53:01:91143] DEBUG 27260 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:18:09:1599770] DEBUG 27260 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/38", parameters={}
+[2025-08-19 16:18:09:1599787] DEBUG 27260 --- [nio-8081-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:18:10:1599858] DEBUG 27260 --- [nio-8081-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@68700aae]
+[2025-08-19 16:18:10:1600097] DEBUG 27260 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:18:10:1600099] DEBUG 27260 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=38, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:18:10:1600103] DEBUG 27260 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:21:38:1808499] DEBUG 27260 --- [nio-8081-exec-9] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/38", parameters={}
+[2025-08-19 16:21:38:1808499] DEBUG 27260 --- [nio-8081-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:21:38:1808500] DEBUG 27260 --- [nio-8081-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@5b887388]
+[2025-08-19 16:21:38:1808527] DEBUG 27260 --- [nio-8081-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:21:38:1808527] DEBUG 27260 --- [nio-8081-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=38, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:21:38:1808528] DEBUG 27260 --- [nio-8081-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:22:14:3673] DEBUG 21676 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 16:22:14:3730] DEBUG 21676 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 16:22:14:3759] DEBUG 21676 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 16:22:14:3783] DEBUG 21676 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 16:22:21:10919] INFO  21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 16:22:21:10919] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 16:22:21:10919] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 16:22:21:10919] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 16:22:21:10920] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4ac2b4c6
+[2025-08-19 16:22:21:10920] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@5e89e527
+[2025-08-19 16:22:21:10920] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 16:22:21:10920] INFO  21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2025-08-19 16:22:21:10928] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/38", parameters={}
+[2025-08-19 16:22:21:10937] DEBUG 21676 --- [nio-8081-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:22:21:11030] DEBUG 21676 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@16a23da9]
+[2025-08-19 16:22:38:28097] DEBUG 21676 --- [nio-8081-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.wanted.wantedshop.common.exception.GlobalExceptionHandler#exception(Exception)
+[2025-08-19 16:22:38:28123] DEBUG 21676 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:22:38:28124] DEBUG 21676 --- [nio-8081-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.wanted.wantedshop.common.exception.BaseResDto@cd1fb7e]
+[2025-08-19 16:22:38:28134] DEBUG 21676 --- [nio-8081-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [ERROR: duplicate key value violates unique constraint "products_slug_key"<EOL>  Detail: Key (slug)=(updated-super-comfortable-sofa11) already exists.] [insert into products (brand_id,created_at,full_description,name,seller_id,short_description,slug,status,updated_at) values (?,?,?,?,?,?,?,?,?)]; SQL [insert into products (brand_id,created_at,full_description,name,seller_id,short_description,slug,status,updated_at) values (?,?,?,?,?,?,?,?,?)]; constraint [products_slug_key]]
+[2025-08-19 16:22:38:28134] DEBUG 21676 --- [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:23:11:61048] DEBUG 21676 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/44", parameters={}
+[2025-08-19 16:23:11:61048] DEBUG 21676 --- [nio-8081-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:23:11:61049] DEBUG 21676 --- [nio-8081-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@3215b720]
+[2025-08-19 16:23:18:67889] DEBUG 21676 --- [nio-8081-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:23:18:67890] DEBUG 21676 --- [nio-8081-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=46, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:23:18:67892] DEBUG 21676 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:35:49:819572] DEBUG 21676 --- [nio-8081-exec-7] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/44", parameters={}
+[2025-08-19 16:35:49:819572] DEBUG 21676 --- [nio-8081-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:35:49:819573] DEBUG 21676 --- [nio-8081-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@722a54b7]
+[2025-08-19 16:35:58:828111] DEBUG 21676 --- [nio-8081-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:35:58:828111] DEBUG 21676 --- [nio-8081-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=null, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:35:58:828112] DEBUG 21676 --- [nio-8081-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:37:01:4258] DEBUG 29996 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 16:37:01:4317] DEBUG 29996 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 16:37:01:4345] DEBUG 29996 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 16:37:01:4372] DEBUG 29996 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 16:37:10:12975] INFO  29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 16:37:10:12975] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 16:37:10:12975] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 16:37:10:12975] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 16:37:10:12976] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@caee26e
+[2025-08-19 16:37:10:12976] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@408a0e92
+[2025-08-19 16:37:10:12976] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 16:37:10:12976] INFO  29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2025-08-19 16:37:10:12984] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/44", parameters={}
+[2025-08-19 16:37:10:12996] DEBUG 29996 --- [nio-8081-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:37:10:13097] DEBUG 29996 --- [nio-8081-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@36a98cb6]
+[2025-08-19 16:37:10:13343] DEBUG 29996 --- [nio-8081-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:37:10:13345] DEBUG 29996 --- [nio-8081-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=null, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:37:10:13352] DEBUG 29996 --- [nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:41:02:4507] DEBUG 19664 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+[2025-08-19 16:41:03:4558] DEBUG 19664 --- [           main] o.s.w.s.h.SimpleUrlHandlerMapping        : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2025-08-19 16:41:03:4587] DEBUG 19664 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2025-08-19 16:41:03:4615] DEBUG 19664 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[2025-08-19 16:41:09:10903] INFO  19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2025-08-19 16:41:09:10903] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+[2025-08-19 16:41:09:10903] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+[2025-08-19 16:41:09:10903] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+[2025-08-19 16:41:09:10904] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@674b9b85
+[2025-08-19 16:41:09:10904] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@8d5b303
+[2025-08-19 16:41:09:10904] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2025-08-19 16:41:09:10904] INFO  19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2025-08-19 16:41:09:10913] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : PUT "/api/products/44", parameters={}
+[2025-08-19 16:41:09:10922] DEBUG 19664 --- [nio-8081-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#updateProduct(Long, ProductSaveRequest)
+[2025-08-19 16:41:09:11014] DEBUG 19664 --- [nio-8081-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@679d39db]
+[2025-08-19 16:41:09:11340] DEBUG 19664 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:41:09:11343] DEBUG 19664 --- [nio-8081-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=44, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:41:09:11352] DEBUG 19664 --- [nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[2025-08-19 16:45:13:254788] DEBUG 19664 --- [nio-8081-exec-5] o.s.web.servlet.DispatcherServlet        : DELETE "/api/products/44", parameters={}
+[2025-08-19 16:45:13:254789] DEBUG 19664 --- [nio-8081-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.wanted.wantedshop.product.presentation.CommandProductController#deleteProduct(Long, ProductSaveRequest)
+[2025-08-19 16:45:13:254791] DEBUG 19664 --- [nio-8081-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.wanted.wantedshop.product.model.dto.request.ProductSaveRequest@65b35dbb]
+[2025-08-19 16:45:13:254888] DEBUG 19664 --- [nio-8081-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2025-08-19 16:45:13:254888] DEBUG 19664 --- [nio-8081-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ResponseHandler[success=true, data=44, message=요청이 성공적으로 처리되었습니다.]]
+[2025-08-19 16:45:13:254889] DEBUG 19664 --- [nio-8081-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

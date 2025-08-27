@@ -4,6 +4,7 @@ import com.wanted.wantedshop.common.domain.ResponseHandler;
 import com.wanted.wantedshop.common.exception.ResultCode;
 import com.wanted.wantedshop.product.application.ProductService;
 import com.wanted.wantedshop.product.model.dto.request.ProductSearchRequest;
+import com.wanted.wantedshop.product.model.dto.response.ProductResponse;
 import com.wanted.wantedshop.product.model.dto.response.ProductSearchResponse;
 import com.wanted.wantedshop.product.model.entity.product.Product;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class QueryProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseHandler<Product>> getListById(@PathVariable Long id) {
+    public ResponseEntity<ResponseHandler<ProductResponse>> getListById(@PathVariable Long id) {
         return ResponseEntity
                 .ok(ResponseHandler.of(true, service.getListById(id), ResultCode.SUCCESS.getResultMessage()));
     }
