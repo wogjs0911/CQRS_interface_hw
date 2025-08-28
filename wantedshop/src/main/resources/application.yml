@@ -29,4 +29,4 @@ logging:
     com.p6spy: debug  # P6Spy의 로깅 레벨을 debug로 설정
 
 server:
-  port: 8081
+  port: 8080
