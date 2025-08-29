@@ -23,6 +23,19 @@ dependencies {
 	implementation 'p6spy:p6spy:3.9.1'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'  // 로깅을 위한 설정
 
+    // Elasticsearch
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+    // MongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    // Kafka
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // Valkey Cache
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
