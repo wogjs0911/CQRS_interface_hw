@@ -50,14 +50,15 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      # 이렇게 쓰려면, application.yml에서 설정해줘야한다.
 #      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+#      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -108,9 +109,71 @@ services:
     networks:
       - kafka-network  # 네트워크 추가
 
+  # MongoDB - 쿼리 모델을 위한 NoSQL 데이터베이스
+  mongodb:
+    image: mongo:8.0
+    container_name: challenge-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - kafka-network  # 네트워크 추가
+
+  # Elasticsearch - 검색 최적화된 쿼리 모델용
+  elasticsearch:
+    image: elasticsearch:8.17.5
+    container_name: challenge-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    command: >
+      bash -c '
+        bin/elasticsearch-plugin install analysis-nori || true;
+        /usr/local/bin/docker-entrypoint.sh elasticsearch
+      '
+    networks:
+      - kafka-network  # 네트워크 추가
+
+  # Kibana - Elasticsearch 관리 및 모니터링용
+  kibana:
+    image: kibana:8.17.5
+    container_name: challenge-kibana
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - kafka-network  # 네트워크 추가
+
+  # Valkey (Redis 호환) - 캐싱 및 임시 데이터 저장용
+  valkey:
+    image: valkey/valkey:7.2.9
+    container_name: challenge-valkey
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey_data:/data
+    networks:
+      - kafka-network  # 네트워크 추가
+
 volumes:
   postgres_data:
   kafka_data:
+  mongodb_data:
+  elasticsearch_data:
+  valkey_data:
 
 networks:
   kafka-network:
