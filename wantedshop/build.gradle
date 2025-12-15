@@ -19,11 +19,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.postgresql:postgresql:42.7.3' // 최신 버전 확인 가능
 	implementation 'p6spy:p6spy:3.9.1'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'  // 로깅을 위한 설정
 
-    // Elasticsearch
+	// PostgreSQL
+	implementation 'org.postgresql:postgresql:42.7.3' // 최신 버전 확인 가능
+
+	// Elasticsearch
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 
     // MongoDB
@@ -35,6 +37,10 @@ dependencies {
     // Valkey Cache
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// JSON 처리기
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
