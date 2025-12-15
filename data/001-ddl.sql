@@ -18,7 +18,8 @@ CREATE TABLE sellers (
     rating DECIMAL(3, 2),
     contact_email VARCHAR(100),
     contact_phone VARCHAR(20),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 브랜드(Brand) 테이블
