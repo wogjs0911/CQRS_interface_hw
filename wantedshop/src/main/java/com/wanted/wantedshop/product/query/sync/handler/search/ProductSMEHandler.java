@@ -1,8 +1,8 @@
 package com.wanted.wantedshop.product.query.sync.handler.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wanted.wantedshop.product.query.search.ProductSearchDocument;
-import com.wanted.wantedshop.product.query.search.ProductSearchRepository;
+import com.wanted.wantedshop.product.query.entity.ProductSearchDocument;
+import com.wanted.wantedshop.product.query.repository.ProductSearchRepository;
 import com.wanted.wantedshop.product.query.sync.CdcEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

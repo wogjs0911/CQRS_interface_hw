@@ -1,5 +1,6 @@
-package com.wanted.wantedshop.product.query.search;
+package com.wanted.wantedshop.product.query.sync;
 
+import com.wanted.wantedshop.product.query.entity.ProductSearchDocument;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

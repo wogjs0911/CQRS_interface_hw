@@ -1,6 +1,7 @@
-package com.wanted.wantedshop.product.query.search;
+package com.wanted.wantedshop.product.query.repository;
 
 
+import com.wanted.wantedshop.product.query.entity.ProductSearchDocument;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

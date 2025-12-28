@@ -1,7 +1,6 @@
 package com.wanted.wantedshop.product.query.sync.handler.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wanted.wantedshop.product.query.search.ProductSearchRepository;
 import com.wanted.wantedshop.product.query.sync.CdcEvent;
 import com.wanted.wantedshop.product.query.sync.handler.AbstractCdcEventHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +65,7 @@ public class ProductDetailSMEHandler extends AbstractCdcEventHandler {
         }
     }
 
+    // 부분 업데이트를 위한 메서드
     private void updatePartialDocument(Long productId, Map<String, Object> updates) {
         if(productId == null || updates == null || updates.isEmpty()) {
             return;

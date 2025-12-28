@@ -1,4 +1,4 @@
-package com.wanted.wantedshop.product.query.search;
+package com.wanted.wantedshop.product.query.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
