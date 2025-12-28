@@ -1,5 +1,6 @@
-package com.wanted.wantedshop.product.query.document;
+package com.wanted.wantedshop.product.query.repository;
 
+import com.wanted.wantedshop.product.query.entity.ProductDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
